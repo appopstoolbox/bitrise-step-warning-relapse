@@ -11,4 +11,4 @@ warning_number="$(echo -e "${warning_number_space}" | tr -d '[:space:]')"
 envman add --key NUMBER_OF_WARNINGS --value $warning_number
 
 # Test regression
-./cli-regression-protector "warning" "$warning_number" "<" ".ci/ci.sqlite3"
+./cli-regression-protector "warning_relapse" "$warning_number" "<" ".ci/ci.sqlite3"
