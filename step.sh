@@ -9,3 +9,8 @@ warning_number="$(echo -e "${warning_number_space}" | tr -d '[:space:]')"
 
 # Test regression
 ./relapse "warning_relapse" "$warning_number" "<" ".ci/ci.sqlite3"
+
+# update saved database
+git add .ci/ci.sqlite3
+git commit -am "Update Test Count database"
+git push origin
