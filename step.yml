@@ -29,7 +29,7 @@ type_tags:
   - test
 
 is_requires_admin_user: true
-is_always_run: true
+is_always_run: false
 is_skippable: false
 run_if: ""
 
@@ -50,3 +50,13 @@ inputs:
       is_expand: true
       is_required: true
       value_options: []
+  - buildTool: xcodebuild
+    opts:
+      title: "Build Tool"
+      summary: Tool used for building the app
+      description: |
+        Tool used for building the app
+		Description
+      is_expand: true
+      is_required: true
+      value_options: ["xcodebuild","xcpretty"]
