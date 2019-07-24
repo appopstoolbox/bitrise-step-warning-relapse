@@ -6,9 +6,14 @@ ScriptPath=$( cd "$(dirname "$0")" ; pwd -P )
 
 WarningNumber=$($ScriptPath/XCPrettyJSONExtractNumberOfWarning.swift $logFile)
 
+# For debuging purpose
+cat $logFile
+
 $ScriptPath/relapse "warning_relapse_$BITRISE_SCHEME" "$WarningNumber" "<" $DBPath
 
+set +e
 # update saved database
 git add $DBPath
 git commit -am "Update Warning Count Database"
 git push origin HEAD:$BITRISE_GIT_BRANCH
+set -e
