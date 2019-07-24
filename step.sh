@@ -15,7 +15,7 @@ envman add --key WARNING_NUMBER --value "$WarningNumber"
 
 # set +e
 # update saved database
-git add $DBPath
-git commit -am "Update Warning Count Database"
-git push origin HEAD:$BITRISE_GIT_BRANCH
+git add $DBPath  || true
+git commit -am "Update Warning Count Database"  || true
+git push origin HEAD:$BITRISE_GIT_BRANCH || true
 # set -e
