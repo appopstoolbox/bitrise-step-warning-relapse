@@ -11,9 +11,11 @@ cat $logFile
 
 $ScriptPath/relapse "warning_relapse_$BITRISE_SCHEME" "$WarningNumber" "<" $DBPath
 
-set +e
+envman add --key WARNING_NUMBER --value "$WarningNumber"
+
+# set +e
 # update saved database
-git add $DBPath
-git commit -am "Update Warning Count Database"
-git push origin HEAD:$BITRISE_GIT_BRANCH
-set -e
+# git add $DBPath
+# git commit -am "Update Warning Count Database"
+# git push origin HEAD:$BITRISE_GIT_BRANCH
+# set -e
