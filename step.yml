@@ -48,14 +48,7 @@ inputs:
       is_expand: true
       is_required: true
       value_options: []
-  # - buildTool: xcodebuild
-  #   opts:
-  #     title: "Build Tool"
-  #     summary: Tool used for building the app
-  #     description: "Tool used for building the app"
-  #     is_expand: true
-  #     is_required: true
-  #     value_options: ["xcodebuild","xcpretty"]
+
 outputs:
   - WARNING_NUMBER:
     opts:
