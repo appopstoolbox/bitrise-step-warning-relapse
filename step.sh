@@ -4,7 +4,7 @@ set -ex
 DBPath=".ci/ci.sqlite3"
 ScriptPath=$( cd "$(dirname "$0")" ; pwd -P )
 
-WarningNumber=$(./XCPrettyJSONExtractNumberOfWarning.swift $logFile)
+WarningNumber=$($ScriptPath/XCPrettyJSONExtractNumberOfWarning.swift $logFile)
 
 $ScriptPath/relapse "warning_relapse_$BITRISE_SCHEME" "$WarningNumber" "<" $DBPath
 
