@@ -2,9 +2,9 @@
 
 import Foundation
 
-struct XCPrettyJSON : Codable {
+struct XCPrettyJSON : Codable, Hashable {
   
-  struct XCPrettyJSONError  : Codable {
+  struct XCPrettyJSONError  : Codable, Hashable {
     let file_name : String
     let file_path : String
     let reason : String
@@ -22,7 +22,28 @@ struct XCPrettyJSON : Codable {
 //  let duplicate_symbols_errors : [XCPrettyJSONError]
 //  let tests_failures : [XCPrettyJSONError]
 //  let tests_summary_messages : [XCPrettyJSONError]
+
+	var filteredWarning : [XCPrettyJSONError] {
+    var out : [XCPrettyJSONError] = []
+    out.append(contentsOf: ld_warnings)
+    out.append(contentsOf: compile_warnings)
+    out.append(contentsOf: warnings)
+		return out.uniqueElements
+	}
 }
+
+public extension Sequence where Element: Equatable {
+  var uniqueElements: [Element] {
+    return self.reduce(into: []) {
+      uniqueElements, element in
+      
+      if !uniqueElements.contains(element) {
+        uniqueElements.append(element)
+      }
+    }
+  }
+}
+
 
 func extractNumberOfWarning(_ args: [String]) {
   
@@ -38,10 +59,7 @@ func extractNumberOfWarning(_ args: [String]) {
   }
   
   if let parsedJSON = try? JSONDecoder().decode(XCPrettyJSON.self, from: jsonData) {
-    var total = 0
-    total += parsedJSON.compile_warnings.count
-    total += parsedJSON.warnings.count
-    total += parsedJSON.ld_warnings.count
+    let total = parsedJSON.filteredWarning.count	
     print("\(total)")
     exit(EXIT_SUCCESS)
   }
