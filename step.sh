@@ -1,5 +1,5 @@
 #!/bin/bash
-# set -ex
+set -ex
 
 DBPath=".ci/ci.sqlite3"
 ScriptPath=$( cd "$(dirname "$0")" ; pwd -P )
